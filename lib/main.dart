@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  List<int> _returnNumbersSorted(int quantityOfNumbers) {
+  static List<int> _returnNumbersSorted(int quantityOfNumbers) {
     List<int> _megaList = new List();
     var rand = new Random();
     for (int numero = 1; numero <= quantityOfNumbers; numero++) {
@@ -50,6 +50,38 @@ class _MyHomePageState extends State<MyHomePage> {
     return _megaList;
   }
 
+  Container _container(TextEditingController textEditing){
+    return Container (
+        height: 50,
+        width: 200,
+        margin: EdgeInsets.fromLTRB(0, 0, 0, 50),
+        decoration: _myDecoration(),
+        padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+        child: TextField(
+            style: TextStyle(
+              fontSize: 17
+            ),
+            controller: textEditing,
+            enabled: false,
+        ),
+    );
+  }
+  Container _containerWithText(String title){
+    return Container(
+      child: Text(title,
+                  style: TextStyle(
+                    fontSize: 20
+                  )),
+
+    );
+  }
+  BoxDecoration _myDecoration(){
+    return BoxDecoration(
+        color: Colors.lightBlue[100],
+        border: Border.all()
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,19 +89,15 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
+          child:  Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextField(
-              controller: _inputMegaSenaController,
-              enabled: false,
-            ),TextField(
-              controller: _inputQuinaController,
-              enabled: false,
-            ),TextField(
-              controller: _inputQuadraController,
-              enabled: false,
-            ),
+            _containerWithText("Mega Sena"),
+            _container(_inputMegaSenaController),
+            _containerWithText("Quina"),
+            _container(_inputQuinaController),
+            _containerWithText("Quadra"),
+            _container(_inputQuadraController)
           ],
         ),
       ),
